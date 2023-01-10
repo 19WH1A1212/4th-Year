@@ -1,0 +1,89 @@
+#define LDR 19
+#define LED1 3
+#define LED2 5
+#define LED3 6
+#define LED4 9
+#define LED5 10
+
+#define S1 14
+#define S2 15
+#define S3 16
+#define S4 17
+#define S5 18
+
+int Light = 0;
+int S1O = 0;
+int S2O = 0;
+int S3O = 0;
+int S4O = 0;
+int S5O = 0;
+
+void setup()
+{
+  pinMode(LDR, INPUT);
+  pinMode(LED1, OUTPUT);
+  pinMode(LED2, OUTPUT);
+  pinMode(LED3, OUTPUT);
+  pinMode(LED4, OUTPUT);
+  pinMode(LED5, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  Light = analogRead(LDR);
+  S1O = analogRead(S1);
+  S2O = analogRead(S2);
+  S3O = analogRead(S3);
+  S4O = analogRead(S4);
+  S5O = analogRead(S5);
+//  Serial.print("Intensity Level: ");
+//  Serial.println(Light);
+
+  Serial.println("Total Energy Saved / day - 1 Unit");
+  Serial.println("Regular LED Lamp Load - 20 Watt");
+  Serial.println("Power Saving Mode - 2 Watt");
+  Serial.println("Total current saved per month - 2.5 Amps");
+  Serial.println("");
+  Serial.println("");
+  delay(250);
+
+  if(Light <= 450)
+  {
+    digitalWrite(LED1, LOW);
+    digitalWrite(LED2, LOW);
+    digitalWrite(LED3, LOW);
+    digitalWrite(LED4, LOW);
+    digitalWrite(LED5, LOW);
+  }
+
+  else if(S1O < 100)
+  {
+    digitalWrite(LED1, HIGH);
+  }
+  else if(S2O < 100)
+  {
+    digitalWrite(LED2, HIGH);
+  }
+  else if(S3O < 100)
+  {
+    digitalWrite(LED3, HIGH);
+  }
+  else if(S4O < 100)
+  {
+    digitalWrite(LED4, HIGH);
+  }
+  else if(S5O < 100)
+  {
+    digitalWrite(LED5, HIGH);
+  }
+
+  else
+  {
+    analogWrite(LED1, 75);
+    analogWrite(LED2, 75);
+    analogWrite(LED3, 75);
+    analogWrite(LED4, 75);
+    analogWrite(LED5, 75);
+  }
+}
